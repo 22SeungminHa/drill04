@@ -7,7 +7,7 @@ character = load_image('Pikachu.png')
 
 
 def handle_events():
-    global running, dir, action, move, frame
+    global running, dir, action, move, frame, jump_x
 
     events = get_events()
     for event in events:
@@ -33,8 +33,10 @@ def handle_events():
             elif event.key == SDLK_ESCAPE: #종료
                 running = False
             elif event.key == SDLK_SPACE: #점프
+                jump_x, frame = 0, 0
                 action = 2
             elif event.key == SDLK_e: #전기
+                jump_x, frame = 0, 0
                 action = 3
         elif event.type == SDL_KEYUP:
             if (dir == 1 and event.key == SDLK_a) or (dir == 2 and event.key == SDLK_d) or (dir == 3 and event.key == SDLK_w) or (dir == 4 and event.key == SDLK_s):
@@ -47,7 +49,8 @@ x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 dir = 1
 action = 0
-
+jump_width = [47, 46, 55, 42, 36, 33, 50, 49, 46, 40, 67, 37, 50, 51, 46, 48, 51, 65, 63, 61, 52]
+jump_x = 0
 
 while running:
     clear_canvas()
@@ -77,7 +80,15 @@ while running:
         frame = (frame + 1) % 5
 
     elif action == 2:
-        pass
+        if dir % 2 == 1:
+            character.clip_draw(jump_x, 597 - 247, jump_width[frame], 100, x, y + 20, jump_width[frame] * 2, 100 * 2)
+        else:
+            character.clip_composite_draw(jump_x, 597 - 247, jump_width[frame], 100, 0, 'h', x, y + 20, jump_width[frame] * 2, 100 * 2)
+        jump_x += jump_width[frame]
+        frame = (frame + 1) % 21
+        if frame == 0:
+            jump_x = 0
+
     elif action == 3:
         pass
 
