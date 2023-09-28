@@ -54,7 +54,12 @@ while running:
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
 
     if action == 0:
-        pass
+        if dir % 2 == 1:
+            character.clip_draw(frame * 51, 597 - 48, 51, 48, x, y, 51 * 2, 48 * 2)
+        else:
+            character.clip_composite_draw(frame * 51, 597 - 48, 51, 48, 0, 'h', x, y, 51 * 2, 48 * 2)
+        frame = (frame + 1) % 8
+
     elif action == 1:
         pass
     elif action == 2:
