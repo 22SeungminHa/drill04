@@ -103,9 +103,9 @@ while running:
     # 점프
     elif action == 2:
         if dir % 2 == 1:
-            character.clip_draw(jump_x, 597 - 247, jump_width[frame], 100, x, y + 20, jump_width[frame] * 2, 100 * 2)
+            character.clip_draw(jump_x, 597 - 247, jump_width[frame], 100, x, y + 50, jump_width[frame] * 2, 100 * 2)
         else:
-            character.clip_composite_draw(jump_x, 597 - 247, jump_width[frame], 100, 0, 'h', x, y + 20, jump_width[frame] * 2, 100 * 2)
+            character.clip_composite_draw(jump_x, 597 - 247, jump_width[frame], 100, 0, 'h', x, y + 50, jump_width[frame] * 2, 100 * 2)
         jump_x += jump_width[frame]
         frame = (frame + 1) % 21
         if frame == 0:
