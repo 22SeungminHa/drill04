@@ -75,21 +75,33 @@ while running:
         elif dir == 4:
             y -= 10
 
-        if x - 57 / 2 > 0 and x + 57 / 2 < TUK_WIDTH and y - 48 / 2 > 0 and y + 48 / 2 < TUK_HEIGHT:
+        if x - 57 >= 0 and x + 57 <= TUK_WIDTH and y - 48 >= 0 and y + 48 <= TUK_HEIGHT:
             if dir % 2 == 1:
                 character.clip_draw(frame * 57, 597 - 145, 57, 47, x, y, 57 * 2, 47 * 2)
             else:
                 character.clip_composite_draw(frame * 57, 597 - 145, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
             frame = (frame + 1) % 5
+
         else:
-            if x - 57 / 2 > 0:
-                pass
-            elif x + 57 / 2 < TUK_WIDTH:
-                pass
-            elif y - 48 / 2 > 0:
-                pass
-            elif y + 48 / 2 < TUK_HEIGHT:
-                pass
+            if x - 57 < 0 or x + 57 > TUK_WIDTH:
+                if x - 57 < 0:
+                    x = 57
+                    character.clip_draw(0, 597 - 96, 57, 47, x, y, 57 * 2, 47 * 2)
+
+                elif x + 57 > TUK_WIDTH:
+                    x = TUK_WIDTH - 57
+                    character.clip_composite_draw(0, 597 - 96, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
+
+            elif y - 48 < 0 or y + 48 > TUK_HEIGHT:
+                if y - 48 < 0: y = 48
+                elif y + 48 > TUK_HEIGHT: y = TUK_HEIGHT - 48
+
+                if dir % 2 == 1:
+                    character.clip_draw(frame * 57, 597 - 145, 57, 47, x, y, 57 * 2, 47 * 2)
+                else:
+                    character.clip_composite_draw(frame * 57, 597 - 145, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
+                frame = (frame + 1) % 5
+
 
     # 점프
     elif action == 2:
