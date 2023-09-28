@@ -61,7 +61,21 @@ while running:
         frame = (frame + 1) % 8
 
     elif action == 1:
-        pass
+        if dir == 1:
+            x -= 10
+        elif dir == 2:
+            x += 10
+        elif dir == 3:
+            y += 10
+        elif dir == 4:
+            y -= 10
+
+        if dir % 2 == 1:
+            character.clip_draw(frame * 57, 597 - 145, 57, 47, x, y, 57 * 2, 47 * 2)
+        else:
+            character.clip_composite_draw(frame * 57, 597 - 145, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
+        frame = (frame + 1) % 5
+
     elif action == 2:
         pass
     elif action == 3:
