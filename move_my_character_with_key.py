@@ -14,14 +14,21 @@ def handle_events():
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
-            frame = 0
             if event.key == SDLK_a: #좌
+                if dir != 1:
+                    frame = 0
                 dir, action = 1, 1
             elif event.key == SDLK_d: #우
+                if dir != 2:
+                    frame = 0
                 dir, action = 2, 1
             elif event.key == SDLK_w: #상
+                if dir != 3:
+                    frame = 0
                 dir, action = 3, 1
             elif event.key == SDLK_s: #하
+                if dir != 4:
+                    frame = 0
                 dir, action = 4, 1
             elif event.key == SDLK_ESCAPE: #종료
                 running = False
@@ -30,7 +37,7 @@ def handle_events():
             elif event.key == SDLK_e: #전기
                 action = 3
         elif event.type == SDL_KEYUP:
-            if event.key == SDLK_a or event.key == SDLK_w or event.key == SDLK_s or event.key == SDLK_d:
+            if (dir == 1 and event.key == SDLK_a) or (dir == 2 and event.key == SDLK_d) or (dir == 3 and event.key == SDLK_w) or (dir == 4 and event.key == SDLK_s):
                 frame, action = 0, 0
 
 
@@ -38,7 +45,7 @@ def handle_events():
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
-dir = 0
+dir = 1
 action = 0
 
 
@@ -46,14 +53,19 @@ while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
 
+    if action == 0:
+        pass
+    elif action == 1:
+        pass
+    elif action == 2:
+        pass
+    elif action == 3:
+        pass
 
     update_canvas()
     handle_events()
 
     delay(0.05)
-
-
-close_canvas()
 
 
 close_canvas()
