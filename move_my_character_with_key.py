@@ -47,6 +47,16 @@ def handle_events():
 
 
 
+def paint_pikachu(w, h, poition, cnt):
+    global x, y, dir, frame
+    if dir % 2 == 1:
+        character.clip_draw(frame * w, 597 - poition, w, h, x, y, w * 2, h * 2)
+    else:
+        character.clip_composite_draw(frame * w, 597 - poition, w, h, 0, 'h', x, y, w * 2, h * 2)
+    frame = (frame + 1) % cnt
+
+
+
 running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame, action, jump_x, dir = 0, 0, 0, 1
@@ -58,11 +68,7 @@ while running:
 
     # 정지
     if action == 0:
-        if dir % 2 == 1:
-            character.clip_draw(frame * 51, 597 - 48, 51, 48, x, y, 51 * 2, 48 * 2)
-        else:
-            character.clip_composite_draw(frame * 51, 597 - 48, 51, 48, 0, 'h', x, y, 51 * 2, 48 * 2)
-        frame = (frame + 1) % 8
+        paint_pikachu(51, 48, 48, 8)
 
     # 뛰기
     elif action == 1:
@@ -76,11 +82,7 @@ while running:
             y -= 10
 
         if x - 57 >= 0 and x + 57 <= TUK_WIDTH and y - 48 >= 0 and y + 48 <= TUK_HEIGHT:
-            if dir % 2 == 1:
-                character.clip_draw(frame * 57, 597 - 145, 57, 47, x, y, 57 * 2, 47 * 2)
-            else:
-                character.clip_composite_draw(frame * 57, 597 - 145, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
-            frame = (frame + 1) % 5
+            paint_pikachu(57, 47, 145, 5)
 
         else:
             if x - 57 < 0 or x + 57 > TUK_WIDTH:
@@ -96,12 +98,7 @@ while running:
                 if y - 48 < 0: y = 48
                 elif y + 48 > TUK_HEIGHT: y = TUK_HEIGHT - 48
 
-                if dir % 2 == 1:
-                    character.clip_draw(frame * 57, 597 - 145, 57, 47, x, y, 57 * 2, 47 * 2)
-                else:
-                    character.clip_composite_draw(frame * 57, 597 - 145, 57, 47, 0, 'h', x, y, 57 * 2, 47 * 2)
-                frame = (frame + 1) % 5
-
+                paint_pikachu(57, 47, 145, 5)
 
     # 점프
     elif action == 2:
@@ -116,11 +113,7 @@ while running:
 
     # 전기
     elif action == 3:
-        if dir % 2 == 1:
-            character.clip_draw(frame * 53, 597 - 295, 53, 45, x, y, 53 * 2, 45 * 2)
-        else:
-            character.clip_composite_draw(frame * 53, 597 - 295, 53, 45, 0, 'h', x, y, 53 * 2, 45 * 2)
-        frame = (frame + 1) % 17
+        paint_pikachu(53, 45, 295, 17)
         if frame == 0:
             action = 0
         pass
