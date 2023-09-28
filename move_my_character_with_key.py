@@ -90,6 +90,11 @@ while running:
             jump_x = 0
 
     elif action == 3:
+        if dir % 2 == 1:
+            character.clip_draw(frame * 53, 597 - 295, 53, 45, x, y, 53 * 2, 45 * 2)
+        else:
+            character.clip_composite_draw(frame * 53, 597 - 295, 53, 45, 0, 'h', x, y, 53 * 2, 45 * 2)
+        frame = (frame + 1) % 17
         pass
 
     update_canvas()
